@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Path } from 'react-native-svg'
-import { AreaChart, Grid, ProgressCircle } from 'react-native-svg-charts'
-import * as shape from 'd3-shape'
+
 import { SafeAreaView, Dimensions, View, Text, TouchableOpacity } from 'react-native'
-import { ButtonGroup } from 'react-native-elements'
+import { Buttons } from '@components/ButtonGroup'
 import Icon from 'react-native-vector-icons/Entypo';
 import Notification from 'react-native-vector-icons/Ionicons';
 import strings from '@styles/strings';
 import colors from '@styles/colors'
 import { marginHorizontal } from '@assets/StyleConfig'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { styles } from '@styles/styles';
 
 Icon.loadFont();
 Notification.loadFont();
@@ -44,8 +45,8 @@ export default class Home extends Component {
             />
         )
         return (
-            <SafeAreaView style={{ backgroundColor: colors.ACCENT1 }}>
-                <View style={{ backgroundColor: colors.ACCENT1 }}>
+            <SafeAreaView style={styles.safeArea}>
+                <KeyboardAwareScrollView style={styles.keyboardAwareScrollView} showsVerticalScrollIndicator={false}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', ...marginHorizontal, marginTop: 40 }}>
                         <View style={{ flexDirection: 'row' }}>
                             <View>
@@ -75,51 +76,30 @@ export default class Home extends Component {
                         </TouchableOpacity>
                     </View>
 
-
-                    <ButtonGroup
+                    <Buttons
+                        style={{ marginTop: 25 }}
                         onPress={this.updateIndex}
                         selectedIndex={selectedIndex}
                         buttons={buttons}
-                        textStyle={{ color: 'white', fontSize: 16, fontFamily: 'Avenir', fontWeight: '800' }}
-                        containerStyle={{ height: 54, marginTop: 20, borderRadius: 15, borderWidth: 0, backgroundColor: colors.ACCENT3, ...marginHorizontal }}
-                        selectedButtonStyle={{ borderRadius: 15, backgroundColor: 'white' }}
-                        selectedTextStyle={{ color: colors.Primary1 }}
-                        innerBorderStyle={{ width: 0 }}
                     />
 
                     <View style={{
-                        width: 167,
-                        marginLeft: 10,
-                        height: 184,
                         backgroundColor: 'white',
-                        borderRadius: 10
+                        height: Dimensions.get('screen').height,
+                        marginTop: 25,
+                        borderTopLeftRadius: 50,
+                        borderTopRightRadius: 50,
                     }}>
-                        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', marginLeft: 10, marginRight: 10, alignItems: 'center' }}>
-                            <View style={{ height: 15, width: 15, backgroundColor: 'blue', marginLeft: 12 }}></View>
-                            <ProgressCircle
-                                style={{ height: 40, width: 40, position: 'absolute' }}
-                                progress={0.3}
-                                progressColor={'rgb(134, 65, 244)'}
-                                strokeWidth={7}
-                                cornerRadius={5}
-                            />
-                            <Icon name="dots-three-vertical" size={30} color="#4F8EF7" />
+                        <View style={{ flexDirection: 'row', ...marginHorizontal, marginTop: 24 }}>
+                            <View>
+                                <Text style={{ fontSize: 16, color: '#8E857E', fontFamily: 'Avenir', fontWeight: '500' }}>{strings.TOTAL}:</Text>
+                                <Text style={{ fontSize: 14, color: colors.BLACK, fontFamily: 'Avenir', fontWeight: '800' }}>$  <Text style={{ fontSize: 28 }}>{value}</Text></Text>
+                            </View>
                         </View>
-                        <AreaChart
-                            style={{ marginTop: 20, height: 70, width: '100%' }}
-                            data={data}
-                            contentInset={{ top: 5, bottom: 5 }}
-                            curve={shape.curveNatural}
-                            svg={{ fill: 'rgba(134, 65, 244, 0.1)' }}
-                        >
-                            <Line />
-                        </AreaChart>
-                        <Text style={{ alignSelf: 'center' }}>Main Banxt</Text>
-                        <Text style={{ alignSelf: 'center' }}>$ 1,234.56</Text>
 
                     </View>
 
-                </View>
+                </KeyboardAwareScrollView>
             </SafeAreaView>
         )
     }

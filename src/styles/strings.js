@@ -1,3 +1,4 @@
 export default {
-    CURRENT_BALANCE: "Current Balance"
+    CURRENT_BALANCE: "Current Balance",
+    TOTAL: "Total"
 }
