@@ -1,5 +1,5 @@
 import SplashPage from "@modules/splash/Splash"
-import HomePage from "@modules/home/Home"
+import TabNavigatorScreen from "@navigation/TabNavigator";
 import { createStackNavigator } from "react-navigation-stack"
 import Color from "@styles/colors"
 
@@ -20,18 +20,19 @@ export const RootStack = createStackNavigator(
         Splash: {
             screen: SplashPage,
             navigationOptions: {
-                header: null,
+                headerShown: false,
             },
         },
-        Home: {
-            screen: HomePage,
+        TabNavigator: {
+            screen: TabNavigatorScreen,
             navigationOptions: {
-                header: null,
+                title: 'Home',
+                headerShown: false //this will hide the header
             },
-        }
+        },
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: "Splash",
         defaultNavigationOptions: {
             headerStyle: headerTabStyle,
             headerTintColor: "#fff",

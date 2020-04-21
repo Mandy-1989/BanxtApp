@@ -22,10 +22,20 @@ export default class App extends Component {
   }
 
   render() {
-    const Apps = createAppContainer(RootStack)
+    return <AppContainer
+      ref={navigatorRef => {
+        NavigationService.setTopLevelNavigator(navigatorRef)
+      }}
+    />
 
-    return <Apps ref={navigatorRef => {
-      NavigationService.setTopLevelNavigator(navigatorRef)
-    }} />
+    // return <Provider>
+    //   <Apps
+    //     ref={navigatorRef => {
+    //       NavigationService.setTopLevelNavigator(navigatorRef)
+    //     }}
+    //   />
+    // </Provider>
   }
 }
+
+const AppContainer = createAppContainer(RootStack);
